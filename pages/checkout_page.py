@@ -19,6 +19,13 @@ class Checkout_page(Base):
     locator_street = '//input[@id="shipping_address_street"]'
     locator_house = '//input[@id="shipping_address_house"]'
     locator_flat = '//input[@id="shipping_address_flat"]'
+    locator_checkbox_subscribe = '//*[@id="tabs-person"]/div[5]/label/span[1]/span[1]'
+    client_name = '//input[@id="client_name"]'
+    client_surname = '//input[@id="client_surname"]'
+    client_middlename = '//input[@id="client_middlename"]'
+    locator_submit = '//button[@id="create_order"]'
+    locator_email = '//input[@id="client_email"]'
+
 
 
 
@@ -43,6 +50,24 @@ class Checkout_page(Base):
     def get_locator_flat(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.locator_flat)))
 
+    def get_locator_checkbox_subscribe(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.locator_checkbox_subscribe)))
+
+    def get_client_name(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.client_name)))
+
+    def get_client_surname(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.client_surname)))
+
+    def get_client_middlename(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.client_middlename)))
+
+    def get_locator_submit(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.locator_submit)))
+
+    def get_locator_email(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.locator_email)))
+
 
     #Actions
 
@@ -63,6 +88,20 @@ class Checkout_page(Base):
         self.get_locator_street().send_keys(street)
         self.get_locator_house().send_keys(house)
         self.get_locator_flat().send_keys(flat)
+
+    def checkbox_subscribe(self):
+        self.get_locator_checkbox_subscribe().click()
+
+    def input_client_name(self, name, surname, middlename):
+        self.get_client_name().send_keys(name)
+        self.get_client_surname().send_keys(surname)
+        self.get_client_middlename().send_keys(middlename)
+
+    def click_submit(self):
+        self.get_locator_submit().click()
+
+    def input_email(self, email):
+        self.get_locator_email().send_keys(email)
 
 
 
@@ -87,6 +126,26 @@ class Checkout_page(Base):
         self.get_current_url()
         self.input_address("Первая", "1", "1")
         print("Input address")
+
+    def remove_checkbox_subscribe(self):
+        self.get_current_url()
+        self.checkbox_subscribe()
+        print("Remove subscribe")
+
+    def do_input_client(self):
+        self.get_current_url()
+        self.input_client_name("Иванова", "Катя", "Петровна")
+        print("Input client name")
+
+    def do_submit_click(self):
+        self.get_current_url()
+        self.click_submit()
+        print("Click submit")
+
+    def do_input_email(self):
+        self.get_current_url()
+        self.input_email("vasilina_18@mail.ru")
+        print("Input email")
 
 
 

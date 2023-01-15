@@ -70,6 +70,10 @@ def test_buy_product():
     chp.choose_post()
     chp.do_input_city()
     chp.do_input_address()
+    chp.remove_checkbox_subscribe()
+    chp.do_input_client()
+    chp.do_input_email()
+    chp.click_submit()
 
 
 
